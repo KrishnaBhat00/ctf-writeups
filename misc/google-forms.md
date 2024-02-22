@@ -13,7 +13,9 @@ The second challenge is much easier, and solves every quiz format Google Form. Y
 
 There are many lists of many attributes and values stored in the source code, but the question and answers will look like this:
 Apologies for the language:
-```[[367298180,"1. fuck",null,3,[[1512361774,[["me",null,-2,null,0],["in",null,-3,null,0],["the",null,-3,null,0],["ass",null,-3,null,0],["hole",null,-3,null,0]],1,null,null,null,null,null,0]],null,null,null,null,null,null,[null,"1. fuck"]],```
+```
+[[367298180,"1. fuck",null,3,[[1512361774,[["me",null,-2,null,0],["in",null,-3,null,0],["the",null,-3,null,0],["ass",null,-3,null,0],["hole",null,-3,null,0]],1,null,null,null,null,null,0]],null,null,null,null,null,null,[null,"1. fuck"]],
+```
 The larger array refers to the section, titled `"1. fuck"` with the number `367298180`. The question number is `1512361774`. I don't know what every factor refers to but, there is than an array of answer options. The first option is the visible answer (`"me"`), with third option refering to the page it leads to (`-2`). The `-3` option means the submit page, whereas `-2` refers to another section. In the challenge, all page numbers were longer (like `556692759`), but the last question featured `-2` for the incorrect answers (leading to another section), and -3 for the last correct answer.
 
 ## More 
