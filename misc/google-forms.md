@@ -3,7 +3,7 @@
 read the source code.
 
 No seriously, pretty much all the information about a google form is sitting there. 
-There were two Google Form related challenges at LACTF 2024. The first one involved a inputting the flag with each character as a separate question, leading to a final page that says correct or incorrect. The second one involved a one queestion open-response quiz that looped on itself.
+There were two Google Form related challenges at LA CTF 2024. The first one involved a inputting the flag with each character as a separate question, leading to a final page that says correct or incorrect. The second one involved a one question open-response quiz that looped on itself.
 
 ## How Google Forms Work
 The entire structure of the form is in any given page's source code, if you're willing to map it out. Stored in json objects, every question and answer option is listed along with a number of factors (often defaulted to null), including the pages it directs the user to. For quizzes it is even simpler, because the answers are stored in the same arrays. 
@@ -16,10 +16,10 @@ Apologies for the language:
 ```
 [[367298180,"1. fuck",null,3,[[1512361774,[["me",null,-2,null,0],["in",null,-3,null,0],["the",null,-3,null,0],["ass",null,-3,null,0],["hole",null,-3,null,0]],1,null,null,null,null,null,0]],null,null,null,null,null,null,[null,"1. fuck"]],
 ```
-The larger array refers to the section, titled `"1. fuck"` with the number `367298180`. The question number is `1512361774`. I don't know what every factor refers to but, there is than an array of answer options. The first option is the visible answer (`"me"`), with third option refering to the page it leads to (`-2`). The `-3` option means the submit page, whereas `-2` refers to another section. In the challenge, all page numbers were longer (like `556692759`), but the last question featured `-2` for the incorrect answers (leading to another section), and -3 for the last correct answer.
+The larger array refers to the section, titled `"1. fuck"` with the number `367298180`. The question number is `1512361774`. I don't know what every factor refers to but, there is than an array of answer options. The first option is the visible answer (`"me"`), with third option referring to the page it leads to (`-2`). The `-3` option means the submit page, whereas `-2` refers to another section. In the challenge, all page numbers were longer (like `556692759`), but the last question featured `-2` for the incorrect answers (leading to another section), and -3 for the last correct answer.
 
 ## More 
-Among all the google analytics mining your forms for data, there is a single POST request that incldues all the important information. 
+Among all the google analytics mining your forms for data, there is a single POST request that includes all the important information. 
 ```
 POST /forms/d/e/1FAIpQLSc-A-Vmx_Te-bAqnu3TrRj-DAsYTgn52uSk92v3fECQb3T83A/formResponse HTTP/2
 Host: docs.google.com
@@ -46,7 +46,7 @@ Accept-Language: en-US,en;q=0.9
 entry.1377469227=5&fvv=1&partialResponse=[[[null,853714080,["batman's kitchen"],0],[null,561191505,["a"],0],[null,267419203,["8"],0]],null,"2396555994171379564"]&pageHistory=0,2,3,5&fbzx=2396555994171379564&continue=1
 ```
 
-The first field includes the entry for a given question, this form only had one question per page, but persumably there might be more if there were more questions on the page. The partial response includes a list of all of the previous page numbers and and the chosen answers. The page history parameter includes the pages visited, it can be manipulated without needing to put in feasible path (it may give problems, but seems to be fine as long as the page exists). Why forms appears to use both a long random generated integer and a linear sequential reference to track pages I do not know. I also do not know what `fvv` and `fbzx` refer to. 
+The first field includes the entry for a given question, this form only had one question per page, but presumably there might be more if there were more questions on the page. The partial response includes a list of all of the previous page numbers and and the chosen answers. The page history parameter includes the pages visited, it can be manipulated without needing to put in feasible path (it may give problems, but seems to be fine as long as the page exists). Why forms appears to use both a long random generated integer and a linear sequential reference to track pages I do not know. I also do not know what `fvv` and `fbzx` refer to. 
 
 Best I can tell, neither the requests nor responses leak the Google Sheets it sends information too. 
 
