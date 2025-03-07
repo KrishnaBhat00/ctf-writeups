@@ -1,8 +1,3 @@
----
-title: "LA CTF 2025 Cache It To Win It"
-author: "Krishna Bhat"
----
-
 # Cache It to Win It
 The challenge had a simple premise. Hit the `/check` endpoint with a given UUID parameter 100 times and you get the flag. The catch? Requests are cached so that the counter does not update on repeated requests. 
 
